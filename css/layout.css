@@ -1,0 +1,68 @@
+section,
+header,
+article,
+nav {
+    display: block;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    margin: 1em 10%;
+    background-image: url(../src/img/background.gif);
+    background-attachment: fixed;
+    background-position: top left;
+    background-repeat: repeat-x;
+    max-width: 80em;
+}
+
+header {
+    background-image: url(../src/img/guitarist.gif);
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    border: 0.1em solid;
+    border-bottom-width: 0;
+}
+
+header nav {
+    background-image: url(../src/img/navbar.gif);
+    background-position: bottom left;
+    background-repeat: repeat-x;
+    border-width: 0 0.1em;
+    border-style: solid;
+    padding-left: 10%;
+}
+
+header nav ul {
+    width: 100%;
+    border-left: 0.1em solid;
+    list-style: none;
+    display: flex;
+    flex: auto;
+}
+
+header nav li {
+    width: 15%;
+}
+
+header nav li a {
+    text-align: center;
+    display: block;
+    padding: 0.5em 2em;
+    border-right: 0.1em solid;
+}
+
+article {
+    border-style: solid 0.1em;
+    border-top-width: 0;
+    padding: 2em 10%;
+    line-height: 1.8em;
+}
+
+article img {
+    border: 0.1em solid;
+    outline: 0.1em solid;
+}
