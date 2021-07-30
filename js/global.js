@@ -159,24 +159,89 @@ function displayAbbreviations() {
     for (let key in defs) {
         let dt = document.createElement('dt');
         let dt_text = document.createTextNode(key);
-        dt.append(dt_text);
+        dt.appendChild(dt_text);
         let dd = document.createElement('dd');
         let dd_text = document.createTextNode(defs[key]);
-        dd.append(dd_text);
-        dlist.append(dt);
-        dlist.append(dd);
+        dd.appendChild(dd_text);
+        dlist.appendChild(dt);
+        dlist.appendChild(dd);
     }
     if (!dlist.childNodes.length) { return false; }
 
     let header = document.createElement('h3');
     let header_text = document.createTextNode('Abbreviations');
-    header.append(header_text);
+    header.appendChild(header_text);
 
     let article = document.getElementsByTagName('article')[0];
     if (!article) { return false; }
 
-    article.append(header);
-    article.append(dlist);
+    article.appendChild(header);
+    article.appendChild(dlist);
+}
+
+function resetFields(whichForm) {
+    for (let f of whichForm) {
+        if (f.type === 'submit') { continue; }
+        let text = f.placeholder;
+        if (!text) { continue; }
+        f.onfocus = function () {
+            if (this.value === text) {
+                this.value = '';
+                this.className = '';
+            }
+        };
+        f.onblur = function () {
+            if (this.value === '') {
+                this.value = text;
+                this.className = 'placeholder';
+            }
+        };
+        f.onblur();
+    }
+}
+
+function prepareForms() {
+    for (let form of document.forms) {
+        resetFields(form);
+        form.onsubmit = function () {
+            return submitFormWithAjax(this, document.getElementsByTagName('article')[0]) ? false : true;
+        };
+    }
+}
+
+function displayAjaxLoading(element) {
+    while (element.hasChildNodes()) {
+        element.removeChild(element.lastChild);
+    }
+    let content = document.createElement('img');
+    content.src = './src/img/loading.gif';
+    content.alt = 'loading';
+    content.setAttribute('width', '50px');
+    element.appendChild(content);
+}
+
+function submitFormWithAjax(whichForm, target) {
+    let xhr = new XMLHttpRequest();
+    if (!xhr) { return false; }
+    displayAjaxLoading(target);
+    xhr.open('GET', whichForm.action);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            // console.log(this);
+            if (xhr.status === 200) {
+                let matches = xhr.responseText.match(/<article>([\s\S]+)<\/article>/);
+                if (matches) {
+                    target.innerHTML = matches[1];
+                } else {
+                    target.innerHTML = '<p>Oops, there was an error</p>';
+                }
+            } else {
+                target.innerHTML = '<p>' + xhr.statusText + '</p>';
+            }
+        }
+    };
+    xhr.send();
+    return true;
 }
 
 addLoadEvent(highlightPage);
@@ -185,3 +250,4 @@ addLoadEvent(prepareInternalnav);
 addLoadEvent(prePlaceHolder);
 addLoadEvent(preGallery);
 addLoadEvent(displayAbbreviations);
+addLoadEvent(prepareForms);

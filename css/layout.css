@@ -109,3 +109,11 @@ td {
 dl {
     display: flex;
 }
+
+label {
+    display: block;
+}
+
+fieldset {
+    border: none;
+}
