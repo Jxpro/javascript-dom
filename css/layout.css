@@ -11,7 +11,7 @@ nav {
 }
 
 body {
-    margin: 1em 10%;
+    margin: 1em 20%;
     background-image: url(../src/img/background.gif);
     background-attachment: fixed;
     background-position: top left;
@@ -90,4 +90,12 @@ article img {
     background-image: url(../src/img/slideshow.gif);
     background-position: 0 0;
     transition: all 0.3s;
+}
+
+#imagegallery {
+    display: flex;
+}
+
+#imagegallery li {
+    margin-right: 21.8px;
 }

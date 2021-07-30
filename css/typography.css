@@ -32,7 +32,7 @@ article p {
 h1 {
     font-family: Georgia, "Times New Roman", sans-serif;
     font: 2.4em normal;
-    margin-bottom: 0.8em; /*自己加的*/
+    margin-bottom: 0.3em; /*自己加的*/
 }
 
 h2 {
@@ -49,6 +49,11 @@ h3 {
 
 #imagegallery li {
     list-style-type: none;
+}
+
+#description {
+    font-weight: bold;
+    font-size: 1.2em;
 }
 
 textarea {
