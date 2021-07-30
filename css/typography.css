@@ -22,7 +22,7 @@ header nav {
 } */
 
 article {
-    line-height: 1em;
+    line-height: 1.8em;
 }
 
 article p {
@@ -32,7 +32,7 @@ article p {
 h1 {
     font-family: Georgia, "Times New Roman", sans-serif;
     font: 2.4em normal;
-    margin-bottom: 0.8em;
+    margin-bottom: 0.8em; /*自己加的*/
 }
 
 h2 {
