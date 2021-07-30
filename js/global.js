@@ -21,4 +21,42 @@ function highlightPage() {
     }
 }
 
+function prepareSlideshow() {
+    if (!document.getElementById) { return false; }
+    if (!document.createElement) { return false; }
+
+    let intro = document.getElementById('intro');
+    if (!intro) { return false; }
+
+    let slideshow = document.createElement('div');
+    let arr = intro.getElementsByTagName('a');
+    slideshow.id = 'slideshow';
+    insertAfter(slideshow, intro);
+
+    for (let a of arr) {
+        // console.log(a.href);
+        // console.log(a.getAttribute('href'));
+        a.onmouseover = function () {
+            switch (this.getAttribute('href')) {
+                case 'index.html':
+                    slideshow.style.backgroundPositionX = 0;
+                    break;
+                case 'about.html':
+                    slideshow.style.backgroundPositionX = '-150px';
+                    break;
+                case 'photos.html':
+                    slideshow.style.backgroundPositionX = '-300px';
+                    break;
+                case 'live.html':
+                    slideshow.style.backgroundPositionX = '-450px';
+                    break;
+                case 'contact.html':
+                    slideshow.style.backgroundPositionX = '-600px';
+                    break;
+            }
+        };
+    }
+}
+
 addLoadEvent(highlightPage);
+addLoadEvent(prepareSlideshow);
