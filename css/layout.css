@@ -59,7 +59,7 @@ article {
     border-style: solid 0.1em;
     border-top-width: 0;
     padding: 2em 10%;
-    line-height: 1.8em;
+    /* line-height: 1.8em;   与typography.css冲突 */
 }
 
 article img {
