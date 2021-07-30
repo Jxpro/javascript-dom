@@ -34,6 +34,7 @@ header nav {
     border-width: 0 0.1em;
     border-style: solid;
     padding-left: 10%;
+    padding-right: 12%;
 }
 
 header nav ul {
@@ -41,11 +42,10 @@ header nav ul {
     border-left: 0.1em solid;
     list-style: none;
     display: flex;
-    flex: auto;
 }
 
 header nav li {
-    width: 15%;
+    flex: auto;
 }
 
 header nav li a {
