@@ -59,3 +59,16 @@ h3 {
 textarea {
     font-family: Arial, Helvetica, sans-serif;
 }
+
+tr:hover {
+    font-weight: bold;
+}
+
+dt::after {
+    content: ":";
+    padding: 0 0.3em;
+}
+
+dd {
+    margin-right: 3em;
+}

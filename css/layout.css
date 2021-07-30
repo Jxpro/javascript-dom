@@ -99,3 +99,13 @@ article img {
 #imagegallery li {
     margin-right: 21.8px;
 }
+
+td {
+    line-height: 3em;
+    width: 15em;
+    text-align: center;
+}
+
+dl {
+    display: flex;
+}

@@ -10,7 +10,7 @@ function highlightPage() {
     if (!nav) { return false; }
 
     let list = nav.getElementsByTagName('a');
-    if (!list) { return false; }
+    if (!list.length) { return false; }
 
     let url = window.location.href;
     for (let a of list) {
@@ -142,8 +142,46 @@ function prePlaceHolder() {
     insertAfter(imgNode, pNode);
 }
 
+function displayAbbreviations() {
+    if (!document.getElementById) { return false; }
+    if (!document.createElement) { return false; }
+    if (!document.createTextNode) { return false; }
+    let abbr = document.getElementsByTagName('abbr');
+    if (!abbr.length) { return false; }
+
+    let defs = [];
+    for (let a of abbr) {
+        if (!a.childNodes.length) { continue; }
+        defs[a.innerHTML] = a.title;
+    }
+
+    let dlist = document.createElement('dl');
+    for (let key in defs) {
+        let dt = document.createElement('dt');
+        let dt_text = document.createTextNode(key);
+        dt.append(dt_text);
+        let dd = document.createElement('dd');
+        let dd_text = document.createTextNode(defs[key]);
+        dd.append(dd_text);
+        dlist.append(dt);
+        dlist.append(dd);
+    }
+    if (!dlist.childNodes.length) { return false; }
+
+    let header = document.createElement('h3');
+    let header_text = document.createTextNode('Abbreviations');
+    header.append(header_text);
+
+    let article = document.getElementsByTagName('article')[0];
+    if (!article) { return false; }
+
+    article.append(header);
+    article.append(dlist);
+}
+
 addLoadEvent(highlightPage);
 addLoadEvent(prepareSlideshow);
 addLoadEvent(prepareInternalnav);
 addLoadEvent(prePlaceHolder);
 addLoadEvent(preGallery);
+addLoadEvent(displayAbbreviations);
