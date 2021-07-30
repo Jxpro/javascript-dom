@@ -6,14 +6,14 @@ function highlightPage() {
     if (!document.getElementById) { return false; }
     if (!document.getElementsByTagName) { return false; }
 
-    let list = document.getElementById('hearder-nav-list');
+    let nav = document.getElementById('hearder-nav-list');
+    if (!nav) { return false; }
+
+    let list = nav.getElementsByTagName('a');
     if (!list) { return false; }
 
-    let arr = list.getElementsByTagName('a');
-    if (!arr) { return false; }
-
     let url = window.location.href;
-    for (let a of arr) {
+    for (let a of list) {
         if (url.indexOf(a.href) > -1) {
             addClass(a, 'here');
             document.body.id = a.innerHTML.toLocaleLowerCase();
@@ -36,6 +36,7 @@ function prepareSlideshow() {
     for (let a of arr) {
         // console.log(a.href);
         // console.log(a.getAttribute('href'));
+        // a.href = a.getAttribute('href');
         a.onmouseover = function () {
             switch (this.getAttribute('href')) {
                 case 'index.html':
@@ -58,5 +59,32 @@ function prepareSlideshow() {
     }
 }
 
+function showSection(id) {
+    let section = document.getElementsByTagName('section');
+    for (let sec of section) {
+        sec.style.display = sec.id === id ? 'block' : 'none';
+    }
+}
+
+function prepareInternalnav() {
+    if (!document.getElementById) { return false; }
+    let nav = document.getElementById('about-nav-list');
+    let list = nav.getElementsByTagName('a');
+
+    for (let a of list) {
+        let secid = a.href.split('#')[1];
+        let sec = document.getElementById(secid);
+        if (!sec) { continue; }
+        a.secid = secid;
+        sec.style.display = 'none';
+        a.onclick = function () {
+            showSection(this.secid);
+            return false;
+        };
+    }
+
+}
+
 addLoadEvent(highlightPage);
 addLoadEvent(prepareSlideshow);
+addLoadEvent(prepareInternalnav);
